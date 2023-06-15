@@ -1,31 +1,62 @@
-const core = require('@actions/core');
-const fetch = require('node-fetch');
+import core from '@actions/core';
+import fetch from 'node-fetch';
 
-try {
-    const pageId = core.getInput('PAGE_ID');
-    const accessToken = core.getInput('ACCESS_TOKEN');
-    const message = core.getInput('MESSAGE');
+const validateInput = (key) => {
+    const input = core.getInput(key);
 
-    if (!pageId || !accessToken || !message) {
-        console.log('Invalid input');
-    } else {
+    if (!input) {
+        return core.setFailed(`Invalid input for ${key}`);
+    }
+
+    return input;
+};
+
+async function run() {
+    try {
+        const pageId = validateInput('PAGE_ID');
+        const accessToken = validateInput('ACCESS_TOKEN');
+        const message = validateInput('MESSAGE');
+
         const url = `https://graph.facebook.com/v13.0/${pageId}/feed`;
         const data = {
             message: message,
             access_token: accessToken,
         };
 
-        fetch(url, {
+        const response = await fetch(url, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json',
             },
-        })
-            .then((response) => response.json())
-            .then((data) => console.log(data))
-            .catch((error) => console.error('Error:', error));
+        });
+
+        if (!response.ok) {
+            response
+                .json()
+                .then((errorData) => {
+                    const errorMessage = `Error ${response.status}: ${errorData.error.message}`;
+                    console.error(errorMessage);
+                    core.setFailed(errorMessage);
+                })
+                .catch((error) => {
+                    const errorMessage = `Error ${response.status}: ${response.statusText}`;
+                    console.error(errorMessage);
+                    core.setFailed(errorMessage);
+                });
+        } else {
+            response
+                .json()
+                .then((data) => console.log(data))
+                .catch((error) => {
+                    const errorMessage = `Error ${response.status}: ${errorData.error.message}`;
+                    console.error(errorMessage);
+                    core.setFailed(errorMessage);
+                });
+        }
+    } catch (error) {
+        core.setFailed(error.message);
     }
-} catch (error) {
-    core.setFailed(error.message);
 }
+
+run();

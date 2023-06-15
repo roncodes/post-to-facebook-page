@@ -2,6 +2,7 @@
     "name": "roncodes/post-to-facebook-page",
     "version": "1.0.0",
     "description": "A Github Action to publish a post to a Facebook Page",
+    "type": "module",
     "main": "index.js",
     "scripts": {
         "build": "ncc build index.js -o dist",
