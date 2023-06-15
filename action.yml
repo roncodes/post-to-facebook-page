@@ -1,5 +1,7 @@
 name: "Post to Facebook"
 description: "Post a message to a Facebook page"
+icon: align-right
+color: #4267B2
 inputs:
   page-id:
     description: "The ID of the Facebook page"
