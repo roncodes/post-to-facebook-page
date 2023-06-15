@@ -1,0 +1,15 @@
+{
+    "name": "roncodes/post-to-facebook-page",
+    "version": "1.0.0",
+    "description": "A Github Action to publish a post to a Facebook Page",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Ronald A. Richardson <me@ron.dev>",
+    "license": "ISC",
+    "dependencies": {
+        "@actions/core": "^1.10.0",
+        "node-fetch": "^3.3.1"
+    }
+}

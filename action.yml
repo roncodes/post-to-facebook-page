@@ -1,0 +1,15 @@
+name: "Post to Facebook"
+description: "Post a message to a Facebook page"
+inputs:
+  page-id:
+    description: "The ID of the Facebook page"
+    required: true
+  access-token:
+    description: "The access token for the Facebook page"
+    required: true
+  message:
+    description: "The message to post"
+    required: true
+runs:
+  using: "node12"
+  main: "index.js"
