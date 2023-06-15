@@ -4,6 +4,7 @@
     "description": "A Github Action to publish a post to a Facebook Page",
     "main": "index.js",
     "scripts": {
+        "build": "ncc build index.js -o dist",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Ronald A. Richardson <me@ron.dev>",
