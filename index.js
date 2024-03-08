@@ -13,9 +13,9 @@ const validateInput = (key) => {
 
 async function run() {
     try {
-        const pageId = validateInput('PAGE_ID');
-        const accessToken = validateInput('ACCESS_TOKEN');
-        const message = validateInput('MESSAGE');
+        const pageId = validateInput('page-id');
+        const accessToken = validateInput('access-token');
+        const message = validateInput('message');
 
         const url = `https://graph.facebook.com/v13.0/${pageId}/feed`;
         const data = {
